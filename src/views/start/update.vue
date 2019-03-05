@@ -38,7 +38,10 @@
                                     <el-upload
                                     class="upload-demo"
                                     :data='uploadData'
+                                    name='gzlAnnexs'
+                                    :on-remove="handleRemove"
                                     :on-preview="handlePreview"
+                                    :before-remove="beforeRemove"
                                     :action="uploadPic"
                                     :file-list="fileList"
                                     list-type="picture">
@@ -74,7 +77,7 @@ export default {
             },
             formId:this.$route.params.gzlFormId,
             fileList:[],
-            uploadData:{picTitle:'123'},
+            uploadData:{gzlId:'',formId:''},
             dialogImageUrl: '',
             dialogVisible: false,
             gzlId:this.$route.params.gzlId,
@@ -82,21 +85,61 @@ export default {
     },
     computed: {
         uploadPic() {
-            return this.api.gzlInsertFormByDataMap
+            return this.api.gzlAddAnnexById
         }
     },
     mounted() {
         this.getFormInfo()
+        this.getPicInfo()
     },
     methods: {
+        beforeRemove(file, fileList) {
+            return this.$confirm(`确定移除 ${ file.name }？`);
+        },
         handleRemove(file, fileList) {
-            console.log(file, fileList);
+            let self = this
+            let params = new FormData()
+            params.append('gzlId',file.gzlId)
+            params.append('formId',file.formId)
+            params.append('id',file.id)
+            self.$http.post(self.api.gzlDeleteFormAnnexById,params,{
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            },function(data){
+                if(data.status == 1){
+                    
+                }else{
+                   
+                }
+                
+            },function(response){
+                self.$message.error('操作失败')
+            })
         },
         handlePreview(file) {
             this.dialogImageUrl = file.url;
             this.dialogVisible = true;
         },
-        //
+        // 获取附件列表
+        getPicInfo() {
+            let self = this;
+            self.$http.get(self.api.gzlGetFormAnnexListById, {
+                params:{
+                    gzlId:self.gzlId,
+                    formId:self.formId
+                }
+            }, function(data) {
+                self.fileList = data.data
+                self.fileList.forEach((e)=>{
+                    e.name = e.annexRealName
+                    e.url = e.annexPath
+                })
+            }, function(response) {
+                //失败回调
+            })
+        },
+        //获取表单信息
         getFormInfo() {
             let self = this;
             self.$http.get(self.api.gzlGetFormById, {

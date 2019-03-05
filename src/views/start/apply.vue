@@ -38,7 +38,10 @@
                                     <el-upload
                                     class="upload-demo"
                                     :data='uploadData'
+                                    name='gzlAnnexs'
+                                    :on-change="handleChange"
                                     :on-preview="handlePreview"
+                                    :on-remove="handleRemove"
                                     :action="uploadPic"
                                     :file-list="fileList"
                                     list-type="picture">
@@ -75,14 +78,14 @@ export default {
             },
             formId:'',
             fileList:[],
-            uploadData:{picTitle:'123'},
+            uploadData:{gzlId:'',formId:''},
             dialogImageUrl: '',
             dialogVisible: false,
         }
     },
     computed: {
         uploadPic() {
-            return this.api.gzlInsertFormByDataMap
+            return this.api.gzlAddAnnexById
         }
     },
     mounted() {
@@ -93,17 +96,41 @@ export default {
             let self = this;
             self.$http.get(self.api.gzlGetFormUUId, {}, function(data) {
                 self.formId = data.data
-                
+                self.uploadData.formId = data.data
+                self.uploadData.gzlId = self.gzlId.gzlId
             }, function(response) {
                 //失败回调
             })
         },
+        // 附件删除
         handleRemove(file, fileList) {
-            console.log(file, fileList);
+            let self = this
+            let params = new FormData()
+            params.append('gzlId',self.gzlId.gzlId)
+            params.append('formId',self.formId)
+            params.append('id','')
+            self.$http.post(self.api.gzlDeleteFormAnnexById,params,{
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            },function(data){
+                if(data.status == 1){
+                    
+                }else{
+                   
+                }
+                
+            },function(response){
+                self.$message.error('操作失败')
+            })
         },
         handlePreview(file) {
             this.dialogImageUrl = file.url;
             this.dialogVisible = true;
+        },
+        handleChange(file, fileList) {
+            this.fileList = fileList
+           
         },
         common(apiName,func) {
             let self = this

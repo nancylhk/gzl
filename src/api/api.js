@@ -23,4 +23,16 @@ export default{
     "getDefaultGroupIdByGzlId":BASE_URL+"/getDefaultGroupIdByGzlId",//查询当前工作流的默认groupId
     "gzlReSubmitTaskAgree":BASE_URL+"/gzlReSubmitTaskAgree",//重提
     "gzlSubmitTaskRefuse":BASE_URL+"/gzlSubmitTaskRefuse",//删除
+    // 附件
+    "gzlAddAnnexById":BASE_URL+"/gzlAddAnnexById",//添加附件
+    "gzlGetFormAnnexListById":BASE_URL+"/gzlGetFormAnnexListById",//获取附件列表
+    "gzlDeleteFormAnnexById":BASE_URL+"/gzlDeleteFormAnnexById",//删除附件
+    //审批
+    "gzlGetMyGroupListByUserIdAndGalId":BASE_URL+'/gzlGetMyGroupListByUserIdAndGalId',//获取所有组
+    "gzlGetGroupTaskListByUserId":BASE_URL+'/gzlGetGroupTaskListByUserId',//审批任务列表
+    "gzlSubmitTaskAgree":BASE_URL+"/gzlSubmitTaskAgree",//同意审批
+    "gzlSubmitTaskRefuse":BASE_URL+"/gzlSubmitTaskRefuse",//驳回
+    //历史列表
+    "gzlGetMyHistoryTaskListByUserId":BASE_URL+"gzlGetMyHistoryTaskListByUserId",//表单提交人—本人
+    "gzlGetGroupHistoryTaskListByUserId":BASE_URL+"gzlGetGroupHistoryTaskListByUserId",//表单提交人—组内
 }

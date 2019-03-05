@@ -10,13 +10,16 @@ const Apply = r => require.ensure([], () => r(require('@/views/start/apply')), '
 const List = r => require.ensure([], () => r(require('@/views/start/list')), 'start')
 const Reject = r => require.ensure([], () => r(require('@/views/start/reject')), 'start')
 const Update = r => require.ensure([], () => r(require('@/views/start/update')), 'start')
+const reUpdate = r => require.ensure([], () => r(require('@/views/start/rejectUpdate')), 'start')
 //审批
 const Check = r => require.ensure([], () => r(require('@/views/check/index')), 'check')
+const CheckDetail  = r => require.ensure([], () => r(require('@/views/check/detail')), 'check')
 //历史审批
 const History = r => require.ensure([], () => r(require('@/views/history/index')), 'history')
+const HistoryDetail = r => require.ensure([], () => r(require('@/views/history/detail')), 'history')
 // 工作流管理
 const Workflow = r => require.ensure([], () => r(require('@/views/workflowManage/index')), 'workflowManage')
-const reUpdate = r => require.ensure([], () => r(require('@/views/start/rejectUpdate')), 'start')
+
 export const constantRouterMap = [
   {
     path: '/login',
@@ -89,14 +92,7 @@ export const routerMap = {
     },
     hidden:true
   },
-  '00005':{
-    path:'check/index',
-    component:Check,
-    name:'审批业务',
-    meta: {
-      title:'审批业务'
-    }
-  },
+  
   '00006':{
     path:'history/index',
     component:History,
@@ -120,6 +116,41 @@ export const routerMap = {
     meta: {
       title:'工作流列表'
     }
+  },
+  
+  '00012':{
+    path:'check/index',
+    component:Check,
+    name:'审批列表',
+    meta: {
+      title:'审批业务'
+    }
+  },
+  '00013':{
+    path:'check/detail/:gzlId/:gzlFormId',
+    component:CheckDetail,
+    name:'审批任务详情',
+    meta: {
+      title:'审批任务详情'
+    },
+    hidden:true
+  },
+  '00014':{
+    path:'history/index',
+    component:History,
+    name:'历史审批业务',
+    meta: {
+      title:'历史审批业务'
+    }
+  },
+  '00015':{
+    path:'history/detail/:gzlId/:gzlFormId',
+    component:HistoryDetail,
+    name:'历史审批详情',
+    meta: {
+      title:'历史审批详情'
+    },
+    hidden:true
   },
 }
 export default new Router({

@@ -91,8 +91,10 @@ export default {
         onSearch() {
             if(this.form.postName == 1) {
                 this. getMyFormInfo()
-            }else{
+            }else if(this.form.postName == 2){
                 this.getGroupFormInfo()
+            }else{
+                this.$message.warning('请选择表单提交人')
             }
         },
         //表单列表—本人
@@ -156,6 +158,9 @@ export default {
             },function(data){
                 if(data.status == 1){
                    self.$message.success('提交成功，等待审核...')
+                   setTimeout(function(){
+                       location.reload()
+                   },1000)
                 }else{
                    
                 }
