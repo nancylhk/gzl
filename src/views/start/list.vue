@@ -87,6 +87,10 @@ export default {
             tableData:[]
         }
     },
+    mounted() {
+        this.form.postName = this.options[0].value
+         this. getMyFormInfo()
+    },
     methods:{
         onSearch() {
             if(this.form.postName == 1) {

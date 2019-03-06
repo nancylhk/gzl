@@ -105,12 +105,13 @@ export default {
         this.getGroupId()
     },
     methods:{
-        onSearch() {
+        onSearch() {          
             if(this.form.postName == 1) {
                 this. getMyFormInfo()
             }else if(this.form.postName == 2){
                 this.getGroupFormInfo()
             }
+            
         },
         //表单列表—本人
         getMyFormInfo() {
@@ -173,7 +174,8 @@ export default {
                 }
             }, function(data) {
                 self.groupList = data.data
-                self.form.groupName = data.data[0].gzlGroupId        
+                self.form.groupName = data.data[0].gzlGroupId    
+                self.getMyFormInfo()  
             }, function(response) {
                 //失败回调
             })

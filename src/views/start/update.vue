@@ -91,6 +91,8 @@ export default {
     mounted() {
         this.getFormInfo()
         this.getPicInfo()
+        this.uploadData.gzlId = this.gzlId
+        this.uploadData.formId = this.formId
     },
     methods: {
         beforeRemove(file, fileList) {

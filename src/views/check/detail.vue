@@ -185,15 +185,15 @@ export default {
         },
         //同意
         onAgree() {
-            this.$confirm('同意通过该业务审批, 是否继续?', '提示', {
+            this.$prompt('请输入审批意见', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
-                type: 'warning'
-                }).then(() => {
+                }).then(({ value }) => {
                 let self = this
                 let params = new FormData()
                 params.append('gzlId',self.gzlId)
                 params.append('formId',self.gzlFormId)
+                params.append('comment',value)
                 self.$http.post(self.api.gzlSubmitTaskAgree,params,{
                 headers: {
                         "Content-Type": "multipart/form-data"
@@ -229,11 +229,10 @@ export default {
         },
         //驳回
         onRefuse() {
-            this.$confirm('此操作将驳回该业务, 是否继续?', '提示', {
+            this.$prompt('请输入驳回理由', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
-                type: 'warning'
-                }).then(() => {
+                }).then(({ value }) => {
                 let self = this
                 let params = new FormData()
                 params.append('gzlId',self.gzlId)

@@ -33,6 +33,6 @@ export default{
     "gzlSubmitTaskAgree":BASE_URL+"/gzlSubmitTaskAgree",//同意审批
     "gzlSubmitTaskRefuse":BASE_URL+"/gzlSubmitTaskRefuse",//驳回
     //历史列表
-    "gzlGetMyHistoryTaskListByUserId":BASE_URL+"gzlGetMyHistoryTaskListByUserId",//表单提交人—本人
-    "gzlGetGroupHistoryTaskListByUserId":BASE_URL+"gzlGetGroupHistoryTaskListByUserId",//表单提交人—组内
+    "gzlGetMyHistoryTaskListByUserId":BASE_URL+"/gzlGetMyHistoryTaskListByUserId",//表单提交人—本人
+    "gzlGetGroupHistoryTaskListByUserId":BASE_URL+"/gzlGetGroupHistoryTaskListByUserId",//表单提交人—组内
 }
