@@ -132,7 +132,7 @@ export default {
         // 修改
         handleUpdate(index, row) {
             this.$router.push({
-                path:`/start/reUpdate/${row.gzlId}/${row.gzlFormId}`
+                path:`/reject/update/${row.gzlId}/${row.gzlFormId}`
             })
         },
 
@@ -153,12 +153,12 @@ export default {
                     message: data.data
                 });
             },function(response){
-                self.$message.error('部署失败')
+                self.$message.error('操作失败')
             })
         },
         //删除
         handleDelete(index, row) {
-            this.$confirm('此操作将永久删除该工作流, 是否继续?', '提示', {
+            this.$confirm('此操作将永久删除该驳回业务, 是否继续?', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'

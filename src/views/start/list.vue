@@ -22,6 +22,9 @@
                     <el-form-item>
                         <el-button type="primary" @click="onSearch">查询</el-button>
                     </el-form-item>
+                    <el-form-item class="floatRight">
+                        <el-button type="danger" @click="toApply">表单录入</el-button>
+                    </el-form-item>
                 </el-form>
             </div> 
             <el-table
@@ -100,6 +103,11 @@ export default {
             }else{
                 this.$message.warning('请选择表单提交人')
             }
+        },
+        toApply() {
+            this.$router.push({
+                path:'/start/apply'
+            })
         },
         //表单列表—本人
         getMyFormInfo() {

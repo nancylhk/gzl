@@ -8,9 +8,10 @@ const ChangePass = r => require.ensure([], () => r(require('@/views/login/change
 // 发起业务
 const Apply = r => require.ensure([], () => r(require('@/views/start/apply')), 'start')
 const List = r => require.ensure([], () => r(require('@/views/start/list')), 'start')
-const Reject = r => require.ensure([], () => r(require('@/views/start/reject')), 'start')
 const Update = r => require.ensure([], () => r(require('@/views/start/update')), 'start')
-const reUpdate = r => require.ensure([], () => r(require('@/views/start/rejectUpdate')), 'start')
+//驳回
+const Reject = r => require.ensure([], () => r(require('@/views/reject/index')), 'reject')
+const reUpdate = r => require.ensure([], () => r(require('@/views/reject/update')), 'reject')
 //审批
 const Check = r => require.ensure([], () => r(require('@/views/check/index')), 'check')
 const CheckDetail  = r => require.ensure([], () => r(require('@/views/check/detail')), 'check')
@@ -64,7 +65,8 @@ export const routerMap = {
     name:'表单录入',
     meta: {
       title:'表单录入'
-    }
+    },
+    hidden:true
   },
   '00009':{
     path:'start/update/:gzlId/:gzlFormId',
@@ -76,7 +78,7 @@ export const routerMap = {
     hidden:true
   },
   '00004':{
-    path:'start/reject',
+    path:'reject/index',
     component:Reject,
     name:'驳回业务',
     meta: {
@@ -84,7 +86,7 @@ export const routerMap = {
     }
   },
   '00010':{
-    path:'start/reUpdate/:gzlId/:gzlFormId',
+    path:'reject/update/:gzlId/:gzlFormId',
     component:reUpdate,
     name:'驳回修改',
     meta: {
@@ -138,9 +140,9 @@ export const routerMap = {
   '00014':{
     path:'history/index',
     component:History,
-    name:'历史审批业务',
+    name:'历史审批列表',
     meta: {
-      title:'历史审批业务'
+      title:'历史审批'
     }
   },
   '00015':{
