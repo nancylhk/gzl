@@ -98,7 +98,12 @@ export default {
             options:[{value:1,label:'本人'},{value:2,label:'组内'}],
             statusList:[{value:0,label:'全部'},{value:2,label:'审核中'},{value:3,label:'审核驳回'},{value:4,label:'审核通过'},{value:5,label:'审核删除'}],
             groupList:[],
-            tableData:[]
+            tableData:[],
+        }
+    },
+    computed:{
+        gzlIdCommon(){
+            return this.$store.state.user.gzlId
         }
     },
     mounted() {
@@ -118,7 +123,7 @@ export default {
             let self = this;
             self.$http.get(self.api.gzlGetMyHistoryTaskListByUserId, {
                 params:{
-                    gzlId:self.gzlId.gzlId,
+                    gzlId:self.gzlIdCommon,
                     groupId:self.form.groupName,
                     gzlStatus:self.form.statusName
                 }
@@ -138,7 +143,7 @@ export default {
             let self = this;
             self.$http.get(self.api.gzlGetGroupHistoryTaskListByUserId, {
                 params:{
-                    gzlId:self.gzlId.gzlId,
+                    gzlId:self.gzlIdCommon,
                     groupId:self.form.groupName,
                     gzlStatus:self.form.statusName
                 }
@@ -170,7 +175,7 @@ export default {
             let self = this;
             self.$http.get(self.api.gzlGetMyGroupListByUserIdAndGalId, {
                 params:{
-                    gzlId:self.gzlId.gzlId,
+                    gzlId:self.gzlIdCommon,
                 }
             }, function(data) {
                 self.groupList = data.data

@@ -59,7 +59,7 @@
                 <el-form-item class="handleBtn">
                     <el-button type="success" @click="onSave">保存</el-button>
                     <el-button type="success" @click="saveAndContinue">保存并继续</el-button>
-                    <el-button type="success" @click="onSubmit">提交审核</el-button>
+                    <!-- <el-button type="success" @click="onSubmit">提交审核</el-button> -->
                     <el-button type="success" @click="goback">返回</el-button>
                 </el-form-item>
             </el-form>
@@ -86,6 +86,9 @@ export default {
     computed: {
         uploadPic() {
             return this.api.gzlAddAnnexById
+        },
+        gzlIdCommon(){
+            return this.$store.state.user.gzlId
         }
     },
     mounted() {
@@ -97,7 +100,7 @@ export default {
             self.$http.get(self.api.gzlGetFormUUId, {}, function(data) {
                 self.formId = data.data
                 self.uploadData.formId = data.data
-                self.uploadData.gzlId = self.gzlId.gzlId
+                self.uploadData.gzlId = self.gzlIdCommon
             }, function(response) {
                 //失败回调
             })
@@ -106,7 +109,7 @@ export default {
         handleRemove(file, fileList) {
             let self = this
             let params = new FormData()
-            params.append('gzlId',self.gzlId.gzlId)
+            params.append('gzlId',self.gzlIdCommon)
             params.append('formId',self.formId)
             params.append('id','')
             self.$http.post(self.api.gzlDeleteFormAnnexById,params,{
@@ -115,9 +118,9 @@ export default {
                 },
             },function(data){
                 if(data.status == 1){
-                    
+                    self.$message.success(data.msg)
                 }else{
-                   
+                   self.$message.error(data.msg)
                 }
                 
             },function(response){
@@ -135,7 +138,7 @@ export default {
         common(apiName,func) {
             let self = this
             let params = new FormData()
-            params.append('gzlId',self.gzlId.gzlId)
+            params.append('gzlId',self.gzlIdCommon)
             params.append('formId',self.formId)
             params.append('Field1',self.form.field1)
             params.append('Field2',self.form.field2)
@@ -172,10 +175,12 @@ export default {
         },
         //保存并继续
         saveAndContinue() {
+            let self = this
             function handle() {
+                self.$message.success('保存成功！')
                 setTimeout(function(){
                     location.reload()
-                })             
+                },500)             
             }
             this.common(this.api.gzlInsertFormByDataMap,handle) 
         },
@@ -183,7 +188,7 @@ export default {
         onSubmit() {
             let self = this
             let params = new FormData()
-            params.append('gzlId',self.gzlId.gzlId)
+            params.append('gzlId',self.gzlIdCommon)
             params.append('formId',self.formId)
             self.$http.post(self.api.gzlStart,params,{
                 headers: {
@@ -193,7 +198,7 @@ export default {
                 if(data.status == 1){
                    self.$message.success('提交成功，等待审核...')
                 }else{
-                   
+                   self.$message.error(data.msg)
                 }
                 
             },function(response){

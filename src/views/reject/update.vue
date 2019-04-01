@@ -39,6 +39,7 @@
                                     class="upload-demo"
                                     :data='uploadData'
                                     :on-preview="handlePreview"
+                                    :on-remove="handleRemove"
                                     :action="uploadPic"
                                     :file-list="fileList"
                                     list-type="picture">
@@ -109,7 +110,7 @@ export default {
             formId:'',
             fileList:[],
             tableData:[],
-            uploadData:{picTitle:'123'},
+            uploadData:{gzlId:'',formId:''},
             dialogImageUrl: '',
             dialogVisible: false,
             gzlId:this.$route.params.gzlId,
@@ -128,7 +129,25 @@ export default {
     },
     methods: {
         handleRemove(file, fileList) {
-            console.log(file, fileList);
+            let self = this
+            let params = new FormData()
+            params.append('gzlId',this.gzlId)
+            params.append('formId',this.gzlFormId)
+            params.append('id',file.id)
+            self.$http.post(self.api.gzlDeleteFormAnnexById,params,{
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                },
+            },function(data){
+                if(data.status == 1){
+                    self.$message.success(data.data)
+                }else{
+                   self.$message.error(data.data)
+                }
+                
+            },function(response){
+                self.$message.error('操作失败')
+            })
         },
         handlePreview(file) {
             this.dialogImageUrl = file.url;

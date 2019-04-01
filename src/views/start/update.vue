@@ -101,8 +101,8 @@ export default {
         handleRemove(file, fileList) {
             let self = this
             let params = new FormData()
-            params.append('gzlId',file.gzlId)
-            params.append('formId',file.formId)
+            params.append('gzlId',this.gzlId)
+            params.append('formId',this.formId)
             params.append('id',file.id)
             self.$http.post(self.api.gzlDeleteFormAnnexById,params,{
                 headers: {
@@ -110,9 +110,9 @@ export default {
                 },
             },function(data){
                 if(data.status == 1){
-                    
+                    self.$message.success(data.data)
                 }else{
-                   
+                   self.$message.error(data.data)
                 }
                 
             },function(response){
@@ -176,7 +176,7 @@ export default {
                 if(data.status == 1){
                     self.$message.success('修改成功')
                 }else{
-                   
+                   self.$message.error(data.msg)
                 }
                 
             },function(response){

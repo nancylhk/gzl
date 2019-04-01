@@ -87,12 +87,17 @@ export default {
                 field:''
             },
             options:[{value:1,label:'本人'},{value:2,label:'组内'}],
-            tableData:[]
+            tableData:[],
+        }
+    },
+    computed:{
+        gzlIdCommon(){
+            return this.$store.state.user.gzlId
         }
     },
     mounted() {
         this.form.postName = this.options[0].value
-         this. getMyFormInfo()
+        this. getMyFormInfo()
     },
     methods:{
         onSearch() {
@@ -114,14 +119,16 @@ export default {
             let self = this;
             self.$http.get(self.api.gzlGetMyFormListByGzlId, {
                 params:{
-                    gzlId:self.gzlId.gzlId,
+                    gzlId:self.gzlIdCommon,
                     field:self.form.field
                 }
             }, function(data) {
-                self.tableData = data.data
-                for(let i = 0;i<self.tableData.length;i++){
-                    self.tableData[i].gzlCreateTime = self.timeFormat(self.tableData[i].gzlCreateTime)
-                    self.tableData[i].gzlUpdateTime = self.timeFormat(self.tableData[i].gzlUpdateTime)
+                if(data.status == 1){
+                    self.tableData = data.data
+                    for(let i = 0;i<self.tableData.length;i++){
+                        self.tableData[i].gzlCreateTime = self.timeFormat(self.tableData[i].gzlCreateTime)
+                        self.tableData[i].gzlUpdateTime = self.timeFormat(self.tableData[i].gzlUpdateTime)
+                    }
                 }
             }, function(response) {
                 //失败回调
@@ -133,7 +140,7 @@ export default {
             let self = this;
             self.$http.get(self.api.gzlGetGroupFormListByGzlId, {
                 params:{
-                    gzlId:self.gzlId.gzlId,
+                    gzlId:self.gzlIdCommon,
                     field:self.form.field
                 }
             }, function(data) {
@@ -157,7 +164,7 @@ export default {
             let s =  (date.getSeconds() <10?'0'+date.getSeconds():date.getSeconds())
             return formatTime = Y+M+D+h+m+s
         },
-        //提交
+        //提交审核
         submit(index, row) {
             let self = this
             let params = new FormData()
@@ -174,7 +181,7 @@ export default {
                        location.reload()
                    },1000)
                 }else{
-                   
+                   self.$message.error(data.msg)
                 }
                 
             },function(response){
@@ -209,7 +216,7 @@ export default {
                                 location.reload()
                             },1000)
                         }else{
-                        
+                            self.$message.error(data.msg)
                         }
                         
                     },function(response){

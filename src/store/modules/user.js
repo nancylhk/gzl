@@ -6,6 +6,7 @@ const user = {
 		status: '',
 		token: getToken(),
 		userInfo: {},
+		gzlId:'1'
 	},
 
 	mutations: {
@@ -17,6 +18,9 @@ const user = {
 		},
 		SET_USERINFO: (state, info) => {
 			state.userInfo = info
+		},
+		SET_GZLID: (state,gzlId) =>{
+			state.gzlId = gzlId
 		}
 
 	},
@@ -31,6 +35,10 @@ const user = {
 		},
 		saveUserInfo({ commit }, userInfo) {
 			commit('SET_USERINFO', userInfo)
+		},
+		saveGzlId({ commit }, gzlId){
+			commit('SET_GZLID', gzlId)
+			setToken(gzlId)
 		},		
 		// 获取用户信息
 		GetUserInfo({

@@ -72,7 +72,13 @@ export default {
                 name:''
             },
             tableData:[],
-            groupId:''
+            groupId:'',
+            
+        }
+    },
+    computed:{
+        gzlIdCommon(){
+            return this.$store.state.user.gzlId
         }
     },
     mounted() {
@@ -85,7 +91,7 @@ export default {
             let self = this;
             self.$http.get(self.api.gzlGetGroupTaskListByUserId, {
                 params:{
-                    gzlId:self.gzlId.gzlId,
+                    gzlId:self.gzlIdCommon,
                     groupId:self.groupId
                 }
             }, function(data) {
@@ -106,7 +112,7 @@ export default {
             let self = this;
             self.$http.get(self.api.getDefaultGroupIdByGzlId, {
                 params:{
-                    gzlId:self.gzlId.gzlId,
+                    gzlId:self.gzlIdCommon,
                 }
             }, function(data) {
                 self.groupId = data.data   
@@ -148,10 +154,15 @@ export default {
                     "Content-Type": "multipart/form-data"
                 },
             },function(data){
-                self.$message({
-                    type: 'success',
-                    message: data.data
-                });
+                if(data.status == 1){
+                    self.$message({
+                        type: 'success',
+                        message: data.data
+                    });
+                }else{
+                    self.$message.error(data.msg)
+                }
+                
             },function(response){
                 self.$message.error('操作失败')
             })

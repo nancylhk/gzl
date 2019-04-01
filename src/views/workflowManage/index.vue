@@ -122,10 +122,18 @@ export default {
                     "Content-Type": "multipart/form-data"
                 },
             },function(data){
-                self.$message({
-                    type: 'success',
-                    message: data.data
-                });
+                if(data.status == 1){
+                    self.$message({
+                        type: 'success',
+                        message: data.data
+                    });
+                }else{
+                    self.$message({
+                        type: 'error',
+                        message: data.data
+                    });
+                }
+                
             },function(response){
                 self.$message.error('部署失败')
             })

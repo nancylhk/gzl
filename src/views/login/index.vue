@@ -46,6 +46,11 @@ export default {
                     },                  
                 },function(response){                  
                     if(response.status == 1) {
+                        self.$message({
+                            type: 'success',
+                            message: response.data,
+                            duration: 2000
+                        })
                         self.$store.dispatch('LoginByUsername', response.status).then(() => {
                             self.loading = false                       
                             self.$store.dispatch('GenerateRoutes').then(() => {
@@ -55,7 +60,7 @@ export default {
                         }).catch(() => {
                             self.loading = false
                         })
-                    //    self.$store.dispatch('saveUserInfo',response.data)
+                        
                     } else {
                         self.loading = false
                         self.$message({

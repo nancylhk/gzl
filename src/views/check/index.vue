@@ -83,7 +83,13 @@ export default {
             },
             tableData:[],
             groupId:'',
-            options:[]
+            options:[],
+            
+        }
+    },
+    computed:{
+        gzlIdCommon(){
+            return this.$store.state.user.gzlId
         }
     },
     mounted() {    
@@ -95,7 +101,7 @@ export default {
             let self = this;
             self.$http.get(self.api.gzlGetGroupTaskListByUserId, {
                 params:{
-                    gzlId:self.gzlId.gzlId,
+                    gzlId:self.gzlIdCommon,
                     groupId:self.form.groupId
                 }
             }, function(data) {
@@ -116,7 +122,7 @@ export default {
             let self = this;
             self.$http.get(self.api.gzlGetMyGroupListByUserIdAndGalId, {
                 params:{
-                    gzlId:self.gzlId.gzlId,
+                    gzlId:self.gzlIdCommon,
                 }
             }, function(data) {
                 self.options = data.data.filter(function(item){

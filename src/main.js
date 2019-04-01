@@ -6,7 +6,6 @@ import router from './router'
 import store from './store/'
 import http from './utils/http.js'
 import api from './api/api.js'
-import gzlId from './utils/gzlId.js'
 import  ElementUI from  'element-ui'
 import  'element-ui/lib/theme-chalk/index.css'
 import './permission'
@@ -14,7 +13,7 @@ import './permission'
 Vue.use(ElementUI);
 Vue.prototype.$http = http;
 Vue.prototype.api = api;
-Vue.prototype.gzlId = gzlId; 
+ 
 
 Vue.config.productionTip = false
 

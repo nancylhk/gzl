@@ -12,7 +12,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/':{
-        target:'http://192.168.50.227:8083',
+        target:'http://192.168.2.198:8083',
         changeOrigin: true,
         pathRewrite: {
             '^/': '/' // 这里理解成用‘/api’代替target里面的地址，组件中我们调接口时直接用/api代替

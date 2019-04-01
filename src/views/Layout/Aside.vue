@@ -3,17 +3,18 @@
         <div class="logo">工作流系统</div>
         <div>
             <el-menu
-            default-active="2"
             router
+            @select="changeGzlId"
             class="el-menu-vertical-demo"
             text-color="#333"
+            :unique-opened='openUnique'
             active-text-color="#177fec">
                <template v-for="item in routes" v-if="!item.hidden ">
                     <el-menu-item :index="'/'+item.children[0].path" v-if="hasOneShowingChildren(item.children)">
                         <span slot="title">{{item.meta.title}}</span>
                     </el-menu-item>
                     <el-submenu :index="item.name" :key="item.name" v-else >
-                        <template slot="title">
+                        <template slot="title" >
                             <span v-if="item.meta && item.meta.title" slot="title">{{item.meta.title}}</span>
                         </template>
                         <template v-for="child in item.children" v-if="!child.hidden" >				
@@ -33,7 +34,7 @@
 export default {
     data() {
         return {
-
+            openUnique:true
         }
     },
      computed: {
@@ -58,6 +59,23 @@ export default {
             }
             return false
         },	
+        changeGzlId(index,indexPath) {
+            // console.log(index);
+            // console.log(indexPath)
+            let gzlIdIndex = indexPath[0];
+            if(gzlIdIndex == '00001'){
+                this.$store.dispatch('saveGzlId','1')
+            }else if(gzlIdIndex == '00002'){
+                this.$store.dispatch('saveGzlId','2')
+            }else if(gzlIdIndex == '00003'){
+                this.$store.dispatch('saveGzlId','3')
+            }else if(gzlIdIndex == '00004'){
+                this.$store.dispatch('saveGzlId','4')
+            }else if(gzlIdIndex == '00005'){
+                this.$store.dispatch('saveGzlId','5')
+            }
+            // console.log(this.$store.state.user.gzlId)
+        }
     }
 }
 </script>

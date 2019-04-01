@@ -46,7 +46,7 @@ export const routerMap = {
   '00001':{
     path:'start/list',
     component:List,
-    name:'表单列表',
+    // name:'表单列表',
     meta: {
       title:'表单列表'
     }
@@ -54,7 +54,7 @@ export const routerMap = {
   '00002':{
     path:'start/list',
     component:List,
-    name:'表单列表',
+    // name:'表单列表',
     meta: {
       title:'表单列表'
     }
@@ -62,7 +62,7 @@ export const routerMap = {
   '00003':{
     path:'start/apply',
     component:Apply,
-    name:'表单录入',
+    // name:'表单录入',
     meta: {
       title:'表单录入'
     },
@@ -71,7 +71,7 @@ export const routerMap = {
   '00009':{
     path:'start/update/:gzlId/:gzlFormId',
     component:Update,
-    name:'表单修改',
+    // name:'表单修改',
     meta: {
       title:'表单修改'
     },
@@ -80,7 +80,7 @@ export const routerMap = {
   '00004':{
     path:'reject/index',
     component:Reject,
-    name:'驳回业务',
+    // name:'驳回业务',
     meta: {
       title:'驳回业务'
     }
@@ -88,7 +88,7 @@ export const routerMap = {
   '00010':{
     path:'reject/update/:gzlId/:gzlFormId',
     component:reUpdate,
-    name:'驳回修改',
+    // name:'驳回修改',
     meta: {
       title:'驳回修改'
     },
@@ -98,7 +98,7 @@ export const routerMap = {
   '00006':{
     path:'history/index',
     component:History,
-    name:'历史审批业务',
+    // name:'历史审批业务',
     meta: {
       title:'历史审批业务'
     }
@@ -106,7 +106,7 @@ export const routerMap = {
   '00007':{
     path:'workflow/index',
     component:Workflow,
-    name:'工作流列表',
+    // name:'工作流列表',
     meta: {
       title:'工作流列表'
     }
@@ -114,7 +114,7 @@ export const routerMap = {
   '00008':{
     path:'workflow/index',
     component:Workflow,
-    name:'工作流列表',
+    // name:'工作流列表',
     meta: {
       title:'工作流列表'
     }
@@ -123,7 +123,7 @@ export const routerMap = {
   '00012':{
     path:'check/index',
     component:Check,
-    name:'审批列表',
+    // name:'审批列表',
     meta: {
       title:'审批业务'
     }
@@ -131,7 +131,7 @@ export const routerMap = {
   '00013':{
     path:'check/detail/:gzlId/:gzlFormId',
     component:CheckDetail,
-    name:'审批任务详情',
+    // name:'审批任务详情',
     meta: {
       title:'审批任务详情'
     },
@@ -140,7 +140,7 @@ export const routerMap = {
   '00014':{
     path:'history/index',
     component:History,
-    name:'历史审批列表',
+    // name:'历史审批列表',
     meta: {
       title:'历史审批'
     }
@@ -148,7 +148,7 @@ export const routerMap = {
   '00015':{
     path:'history/detail/:gzlId/:gzlFormId',
     component:HistoryDetail,
-    name:'历史审批详情',
+    // name:'历史审批详情',
     meta: {
       title:'历史审批详情'
     },
